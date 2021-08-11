@@ -6,7 +6,7 @@ import "components/Application.scss";
 
 import Appointment from "components/Appointment/index"
 import DayList from "components/DayList.js";
-import {getAppointmentsForDay, getInterviewersForDay, getInterview} from "../helpers/selectors"; 
+import {getAppointmentsForDay, getInterviewersForDay, getInterview, getSpotsForDay} from "../helpers/selectors"; 
 import useApplicationData from 'hooks/useApplicationData';
 
 
@@ -46,7 +46,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} setDay={setDay} />
+        <DayList days={state.days} selectedDay={state.day} setDay={setDay} appointments={state.appointments} getSpotsForDay={getSpotsForDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

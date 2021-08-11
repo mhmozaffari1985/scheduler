@@ -33,3 +33,20 @@ export function getInterviewersForDay (state,day) {
             })
   return interviewers;
 }
+
+export const getSpotsForDay = (appointments, days, day) => {
+  const targetDay = days.find((e) => e.name === day);
+  const appointmentList = [...targetDay.appointments];
+  const appointmentsSpread = {...appointments};
+
+  const number = Object.values(appointmentsSpread).reduce((total, appointment) => {
+    if(appointmentList.includes(appointment.id)) {
+      if (appointment.interview) {
+        return total + 1;
+      }
+    }
+    return total;
+  }, 0);
+
+  return 5 - number;
+};
