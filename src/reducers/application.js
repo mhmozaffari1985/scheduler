@@ -1,37 +1,28 @@
-export const SET_DAY = "SET_DAY";
-export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-export const SET_INTERVIEW = "SET_INTERVIEW";
+export const SET_DAY = 'SET_DAY';
+export const SET_APPLICATION_DATA = 'SET_APPLICATION_DATA';
+export const SET_INTERVIEW = 'SET_INTERVIEW';
 
 export function reducer(state, action) {
-  const {appointments, day, days, dayName, id, interview, interviewers } = action;
-  switch (action.type) {
+  const { appointments, day, days, id, interview, interviewers, type } = action;
+  switch (type) {
     case SET_DAY:
-      return { ...state, day }
+      return { ...state, day };
     case SET_APPLICATION_DATA:
-      return { ...state, days, appointments, interviewers }
+      return { ...state, days, appointments, interviewers };
     case SET_INTERVIEW: {
-          const appointment = {
-            ...state.appointments[id],
-            interview: interview && { ...interview }
-          };
-          
-          const appointments = {
-            ...state.appointments,
-            [id]: appointment
-          };
-          
-          const newDays = state.days.map(day => {
-            if(day.name === dayName) {
-              return { ...day, spots: interview ? day.spots - 1 : day.spots + 1 };
-            }
-            return day;
-          });
+      const appointment = {
+        ...state.appointments[id],
+        interview: interview && { ...interview }
+      };
 
-        return { ...state, appointments, days: newDays }
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+
+      return { ...state, appointments };
     }
     default:
-      throw new Error(
-        `Tried to reduce with unsupported action type: ${action.type}`
-      );
+      throw new Error(`Tried to reduce with unsupported action type: ${type}`);
   }
 }

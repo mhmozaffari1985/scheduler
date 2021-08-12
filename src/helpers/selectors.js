@@ -35,18 +35,22 @@ export function getInterviewersForDay (state,day) {
 }
 
 export const getSpotsForDay = (appointments, days, day) => {
-  const targetDay = days.find((e) => e.name === day);
+  const targetDay = days.find(e => e.name === day);
   const appointmentList = [...targetDay.appointments];
-  const appointmentsSpread = {...appointments};
+  const availableSpots = appointmentList.length;
 
-  const number = Object.values(appointmentsSpread).reduce((total, appointment) => {
-    if(appointmentList.includes(appointment.id)) {
-      if (appointment.interview) {
-        return total + 1;
+  const appointmentsSpread = { ...appointments };
+
+  const filledSpots = Object.values(appointmentsSpread).reduce(
+    (total, appointment) => {
+      if (appointmentList.includes(appointment.id)) {
+        if (appointment.interview) {
+          return total + 1;
+        }
       }
-    }
-    return total;
-  }, 0);
-
-  return 5 - number;
+      return total;
+    },
+    0
+  );
+  return availableSpots - filledSpots;
 };

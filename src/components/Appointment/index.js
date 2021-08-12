@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 
 import "components/Appointment/styles.scss";
 
@@ -25,6 +25,14 @@ export default function Appointment(props) {
 
 
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+      transition(EMPTY);
+    }
+  }, [props.interview, transition, mode]);
 
   function genInterview(name, interviewer) {
     const interview = {
@@ -60,7 +68,7 @@ export default function Appointment(props) {
           onSave={(name, interviewer) => {
             transition(SAVING);
             props
-              .bookInterview(props.id, props.day, genInterview(name, interviewer))
+              .bookInterview(props.id, genInterview(name, interviewer))
               .then(() => transition(SHOW))
               .catch(() => {
                 transition(ERROR_SAVE, true);
@@ -78,7 +86,7 @@ export default function Appointment(props) {
           onSave={(name, interviewer) => {
             transition(SAVING);
             props
-              .bookInterview(props.id, props.day, genInterview(name, interviewer))
+              .bookInterview(props.id, genInterview(name, interviewer))
               .then(() => transition(SHOW))
               .catch(() => {
                 transition(ERROR_SAVE, true);
