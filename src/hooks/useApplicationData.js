@@ -26,16 +26,16 @@ export default function useApplicationData() {
   // sends the info to dispatch to update the state
   useEffect(() => {
     // const source = axios.CancelToken.source();
-    const days = axios.get(`http://localhost:8001/api/days` 
-      //,{ proxy: { host: 'localhost', port: 8001 },
-      // cancelToken: source.token,}
-    );
-    const appointments = axios.get(`http://localhost:8001/api/appointments`, {
-      //,{ proxy: { host: 'localhost', port: 8001 },
+    const days = axios.get(`/api/days` 
+      ,{ proxy: { host: 'localhost', port: 8001 },
+      // cancelToken: source.token,
+  });
+    const appointments = axios.get(`/api/appointments`
+      ,{ proxy: { host: 'localhost', port: 8001 },
       // cancelToken: source.token,}
   });
-    const interviewers = axios.get(`http://localhost:8001/api/interviewers`, {
-      //,{ proxy: { host: 'localhost', port: 8001 },
+    const interviewers = axios.get(`/api/interviewers`
+      ,{ proxy: { host: 'localhost', port: 8001 },
       // cancelToken: source.token,}
     });
     Promise.all([days, appointments, interviewers]).then(
@@ -57,7 +57,7 @@ export default function useApplicationData() {
   // sends the info to dispatch to update the state
   const bookInterview = function(id, interview) {
     return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .put(`/api/appointments/${id}`, { interview })
       .then(() => {
         dispatch({ type: SET_INTERVIEW, id, interview });
       });
@@ -67,7 +67,7 @@ export default function useApplicationData() {
   // sends the info to dispatch to update the state
   const cancelInterview = function(id) {
     return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .delete(`/api/appointments/${id}`)
       .then(() => {
         dispatch({ type: SET_INTERVIEW, id, interview: null });
       });
