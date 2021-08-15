@@ -26,17 +26,17 @@ export default function useApplicationData() {
   // sends the info to dispatch to update the state
   useEffect(() => {
     // const source = axios.CancelToken.source();
-    const days = axios.get(`/api/days` 
-      ,{ proxy: { host: 'localhost', port: 8001 },
+    const days = axios.get(`/api/days`, {
+      proxy: { host: 'localhost', port: 3001 },
       // cancelToken: source.token,
-  });
-    const appointments = axios.get(`/api/appointments`
-      ,{ proxy: { host: 'localhost', port: 8001 },
-      // cancelToken: source.token,}
-  });
-    const interviewers = axios.get(`/api/interviewers`
-      ,{ proxy: { host: 'localhost', port: 8001 },
-      // cancelToken: source.token,}
+    });
+    const appointments = axios.get(`/api/appointments`, {
+      proxy: { host: 'localhost', port: 3001 },
+      // cancelToken: source.token,
+    });
+    const interviewers = axios.get(`/api/interviewers`, {
+      proxy: { host: 'localhost', port: 3001 },
+      // cancelToken: source.token,
     });
     Promise.all([days, appointments, interviewers]).then(
       ([days, appointments, interviewers]) =>

@@ -149,3 +149,4 @@ test("getSpotsForDay returns 2", () => {
   const result = getSpotsForDay(state.appointments, state.days, "Tuesday");
   expect(result).toEqual(0);
 });
+

@@ -16,11 +16,7 @@ const fixtures = {
     }
   ],
   appointments: {
-    "1": { 
-      id: 1, 
-      time: "12pm", 
-      interview: null 
-    },
+    "1": { id: 1, time: "12pm", interview: null },
     "2": {
       id: 2,
       time: "1pm",
@@ -31,11 +27,7 @@ const fixtures = {
       time: "2pm",
       interview: { student: "Leopold Silvers", interviewer: 4 }
     },
-    "4": { 
-      id: 4, 
-      time: "3pm", 
-      interview: null 
-    }
+    "4": { id: 4, time: "3pm", interview: null }
   },
   interviewers: {
     "1": {
